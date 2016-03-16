@@ -1,0 +1,57 @@
+<ion-view title="Settings">
+    <ion-content padding="true" class="has-header">
+        <form class="list">
+            <label class="item item-select">
+                <span class="input-label">Notifications</span>
+                <select>
+                    <option>Daily</option>
+                    <option>Every Other Day</option>
+                    <option>Weekly</option>
+                    <option>Monthly</option>
+                </select>
+            </label>
+            <div class="spacer" style="width: 300px; height: 32px;"></div>
+        </form>
+        <form class="list">
+            <h4>Change Password:</h4>
+            <label class="item item-input">
+                <span class="input-label">New Password:</span>
+                <input type="text" placeholder="">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Confirm Password:</span>
+                <input type="text" placeholder="">
+            </label>
+            <label class="item item-input">
+                <span class="input-label">Old Password:</span>
+                <input type="text" placeholder="">
+            </label>
+            <button id="settings-button4" class="button button-calm  button-block">Change Password</button>
+        </form>
+        <form class="list"></form>
+        <li class="item item-toggle">
+            Email Notifications
+            <label class="toggle">
+              <input type="checkbox">
+              <div class="track">
+                <div class="handle"></div>
+              </div>
+            </label>
+          </li>
+
+          <li class="item item-toggle">
+            Location Access
+            <label class="toggle">
+              <input type="checkbox">
+              <div class="track">
+                <div class="handle"></div>
+              </div>
+            </label>
+          </li>
+
+          <li class="item item-button">
+            <label class="button">Logout</label>
+          </li>
+        </ul>
+    </ion-content>
+</ion-view>
