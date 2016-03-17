@@ -50,7 +50,6 @@ angular.module('app.controllers', [])
 	}
 	  ])
    
->>>>>>> 2d2f58c6ceed3835911ea43cc10e1477d0121e97
 .controller('settingsCtrl', function($scope) {
 
 })
