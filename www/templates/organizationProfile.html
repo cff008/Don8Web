@@ -1,3 +1,36 @@
-<ion-view title="Organization Profile">
-    <ion-content overflow-scroll="true" padding="true" class="has-header"></ion-content>
+
+<ion-view title="My Profile">
+    <ion-content overflow-scroll="true" padding="true" style="background: url(img/background.jpg) no-repeat center;" class="has-header">
+        <a ui-sref="tabsController.editProfile" id="myProfile-button1" class="button button-calm button-small icon-left ion-android-settings">Edit Profile</a>
+        <div class="spacer" style="width: 300px; height: 6px;"></div>
+       
+        <ion-list>
+            <ion-item class="item-thumbnail-center">
+            <div style="text-align:center;">
+                <img "img src="img/Logo.jpg" width="20%" height="auto">
+            </div> 
+            <div style="text-align:center;">   
+                <h2>Morgridge Center</h2>
+                <p>morgridge@morgridge.com</p>
+                <p>608-630-0552</p>
+                <p>http://morgridge.wisc.edu/<p>
+                <p>Contact: Mark Bennet <p>
+                <p>Mission Statement: People Helping People<p>
+                <p>Address: Red Gym, Suite 154, 716 Langdon Street, Madison, WI 53706</p>
+            </div>
+            </ion-item>
+        </ion-list>
+        <div class="spacer" style="width: 300px; height: 10px;"></div>
+        <div>
+            <p>
+                <b>
+                    <font color="#FFFFFF">
+                        <font size="5">Interests:</font>
+                    </font>
+                </b>
+            </p>
+        </div>
+       
+        <div class="spacer" style="width: 300px; height: 11px;"></div>
+    </ion-content>
 </ion-view>

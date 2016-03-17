@@ -15,7 +15,11 @@ angular.module('app.controllers', [])
 .controller('myEventsCtrl', function($scope) {
 
 })
-   
+
+.controller('editProfileCtrl', function($scope){
+	
+})
+
 .controller('settingsCtrl', function($scope) {
 
 })

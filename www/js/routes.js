@@ -58,6 +58,16 @@ angular.module('app.routes', [])
     }
   })
 
+  .state('tabsController.editProfile', {
+    url: '/editProfile',
+    views: {
+      'tab1': {
+        templateUrl: 'templates/editProfile.html',
+        controller: 'editProfileCtrl'
+      }
+    }
+  })
+
 $urlRouterProvider.otherwise('/page5')
 
   
