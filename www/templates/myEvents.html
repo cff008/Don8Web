@@ -6,7 +6,7 @@
 
 	<ion-list>
 	
-      <ion-item class="item-icon-right item-avatar item-stable" ui-sref="tabsController.mydetail({id: event.id})" collection-repeat="event in events track by event.id | limitTo:4">
+      <ion-item class="item-icon-right item-avatar item-stable" ui-sref="tabsController.detail({id: event.id})" collection-repeat="event in events track by event.id | limitTo:4">
         <img ng-src="{{event.thumb}}">
         <h2 class="positive">{{event.name}}</h2>
         <p>

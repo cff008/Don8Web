@@ -125,7 +125,12 @@ angular.module('app.services', [])
         zip: '53715',
         lat: 43.067128,
         lng: -89.408266,
-        dates: [
+		emails:[
+			"fake1@email.com",
+			"fake2@email.com",
+		],
+
+	   dates: [
           'Monday: 9:00 AM',
           'Sunday: 9:00 AM'
         ],
@@ -150,7 +155,10 @@ angular.module('app.services', [])
         ],
         lat: 51.163893,
         lng: 10.986114,
-      
+		emails:[
+			"fake1@email.com",
+			"fake2@email.com",
+		],
         contact: {
           tel: '1234/56789',
           email: 'test@example.com'
@@ -173,6 +181,10 @@ angular.module('app.services', [])
         lat: 51.114004,
         lng: 10.933228,
         wheelchair: true,
+		emails:[
+			"fake1@email.com",
+			"fake2@email.com",
+		],
         contact: {
           tel: '1234/56789',
           email: 'test@example.com'
@@ -188,6 +200,10 @@ angular.module('app.services', [])
 		description: 'more',
         number: '17',
         zip: '41515',
+		emails:[
+			"fake1@email.com",
+			"fake2@email.com",
+		],
         dates: [
           'Monday: 9:00 AM',
           'Sunday: 9:00 AM'
@@ -208,6 +224,10 @@ angular.module('app.services', [])
 		description: 'more',
         number: '17',
         zip: '41515',
+		emails:[
+			"fake1@email.com",
+			"fake2@email.com",
+		],
         dates: [
           'Monday: 9:00 AM',
           'Sunday: 9:00 AM'
@@ -229,6 +249,10 @@ angular.module('app.services', [])
 		description: 'more',
         number: '17',
         zip: '41515',
+		emails:[
+			"fake1@email.com",
+			"fake2@email.com",
+		],
         dates: [
           'Monday: 9:00 AM',
           'Sunday: 9:00 AM'
