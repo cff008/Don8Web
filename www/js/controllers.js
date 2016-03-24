@@ -12,10 +12,21 @@ angular.module('app.controllers', [])
 
 })
 
+
 .controller('editProfileCtrl', function($scope){
 	
 })
    
+
+.controller('myEventsCtrl', function($scope) {
+
+})
+
+.controller('editProfileCtrl', function($scope){
+	
+})
+
+
 .controller('myEventsCtrl', [
     '$scope',
     '$state',
