@@ -37,6 +37,16 @@ angular.module('app.routes', [])
       }
     }
   })
+  
+   .state('tabsController.editProfile', {
+    url: '/editProfile',
+    views: {
+      'tab1': {
+        templateUrl: 'templates/editProfile.html',
+        controller: 'editProfileCtrl'
+      }
+    }
+  })
 
   .state('tabsController.myEvents', {
     url: '/MyEvents',
@@ -47,6 +57,17 @@ angular.module('app.routes', [])
       }
     }
   })
+  
+ .state('tabsController.detail', {
+    url: '/detail/:id',
+    views: {
+      'tab2': {
+        templateUrl: 'templates/detail.html',
+        controller: 'detailsCtrl'
+      }
+    }
+  })
+  
 
   .state('tabsController.settings', {
     url: '/Settings',
