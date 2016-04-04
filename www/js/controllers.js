@@ -37,7 +37,7 @@ angular.module('app.controllers', [])
 		$scope.index = 0;
       $scope.loadNext = function () {
         eventService.getNext($scope.index).then(function (events) {
-		  $scope.index += 5;
+		  $scope.index += events.length;
 		  $scope.newEvents = events;
 		  $scope.events = $scope.events.concat($scope.newEvents);
 		  $scope.$broadcast('scroll.infiniteScrollComplete');
