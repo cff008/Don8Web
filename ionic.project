@@ -1,4 +1,31 @@
 {
-  "name": "Don8Web",
-  "app_id": ""
+  "name": "Don8",
+  "app_id": "2ff3c64c",
+  "proxies": [
+  	{
+  		"path": "/events/all",
+  		"proxyUrl": "http://don8don8.site/data/events.php"
+  	},
+	{
+  		"path": "/event",
+  		"proxyUrl": "http://don8don8.site/data/events.php"
+  	},
+  	{
+  		"path": "/login",
+  		"proxyUrl": "http://www.don8don8.site/login.php"
+  	},
+  	{
+  		"path": "/create_profile",
+  		"proxyUrl": "http://www.don8don8.site/create_profile.php"
+  	},
+    {
+      "path": "/get_settings",
+      "proxyUrl": "http://www.don8don8.site/settings.php"
+    },
+    {
+      "path": "/update_settings",
+      "proxyUrl": "http://www.don8don8.site/update_settings.php"
+    }
+  ] 
 }
+
