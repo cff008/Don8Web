@@ -43,20 +43,38 @@ angular.module('app.controllers', [])
 		$scope.events = [];
 		$scope.newEvents = [];
 		$scope.index = 0;
-     
-      $scope.loadNext = function () {
+		$scope.event = {};
+	 addFive = function(eventss,index){
+		var tempevents = [], i = index;
+		for (i; i < eventss.length; i = i + 1) {
+            if(i == index+5){
+				break;
+			}
+         tempevents.push(eventss[i]);
+		}
+		return tempevents;
+		};
+	  
+	 $scope.goToEditEvent = function(){
+		$scope.temp = -1;
+		$state.go('tabsController.editEvent', $scope.temp);
+	 }
+
+	 $scope.loadNext = function () {
 		if($scope.events.length == 0){
 		dataService.getMyEvents().then(function(events){
 			$scope.newEvents = events;
 			// .then(function (events) {
-			  
+			  if($scope.newEvents){
 			  
 			  if($scope.newEvents != $scope.events){
 			  $scope.events = $scope.events.concat(addFive($scope.newEvents,$scope.index));
 			  $scope.index += $scope.newEvents.length;
 			  }
 			  $scope.$broadcast('scroll.infiniteScrollComplete');
-			
+			}else{
+			 $scope.events = [];
+			}
 		// .finally(function () 
 			});
 		}
@@ -70,9 +88,12 @@ angular.module('app.controllers', [])
       };
 	  
 	$scope.moreDataCanBeLoaded = function(){
+		if($scope.newEvents){
 		if($scope.newEvents.length == $scope.index && $scope.newEvents.length != 0){
 			return false;
 		}else{
+			return true;
+		}}else {
 			return true;
 		}
 	};
@@ -140,7 +161,9 @@ angular.module('app.controllers', [])
 .controller('editProfileCtrl', function($scope) {
 
 })
+.controller('organizationProfileCtrl', function($scope) {
 
+})
 .controller('detailCtrl', [
     '$scope',
     '$stateParams',
@@ -200,83 +223,98 @@ angular.module('app.controllers', [])
     }
   ])
 
-.controller('resultCtrl', [
+  
+.controller('editEventCtrl', [
+	'$scope',
+	'$stateParams',
+	'dataService',
+	'$state',
+	function ($scope, $stateParams, dataService,$state){
+		$scope.event = [];
+		var id = $stateParams;
+		if(id != -1){
+			$scope.loading = true;
+			dataService.getEvent(id).then(function (event) {
+			$scope.event = event.
+			$scope.loading = false;	
+			});
+		}else{
+		
+		}
+		
+		/*$scope.submit = function() {
+			dataService.addEvent().then{
+				$state.go('tabsController.myEvents');
+			};
+		};
+		
+		$scope.dataCheck = function(){
+			//maybe need later
+		}'*/
+	}
+	])
+ 
+.controller('detailsCtrl', [
     '$scope',
     '$stateParams',
-    '$state',
-    '$timeout',
-    '$ionicHistory',
-    'eventService',
-    function ($scope, $stateParams, $state, $timeout, $ionicHistory, eventService) {
-      var first = true;
-      $scope.limit = 10;
-      $scope.show = {
-        list: true
-      };
-
-      // show next 10
-      $scope.loadMore = function () {
-        if (!first) {
-          $timeout(function () {
-            $scope.limit += 10;
-            $scope.$broadcast('scroll.infiniteScrollComplete');
-          }, 2000);
-          return;
-        }
-        first = false;
-
-        var wheelChair = $stateParams.wheelChair === 'true',
-            wheelChairLift = $stateParams.wheelChairLift === 'true',
-            search = $stateParams.search;
-
-        if (wheelChair !== $scope.wheelChair || wheelChairLift !== $scope.wheelChairLift || search !== $scope.search) {
-          $scope.wheelChair = wheelChair;
-          $scope.wheelChairLift = wheelChairLift;
-          $scope.search = search;
-          $scope.loading = true;
-          eventService.search(search, wheelChair, wheelChairLift).then(function (events) {
-            $scope.limit = 10;
-            $scope.events = events;
-          }).finally(function () {
-            $scope.loading = false;
-            $scope.$broadcast('scroll.infiniteScrollComplete');
-          });
-        } else {
-          $scope.$broadcast('scroll.infiniteScrollComplete');
-        }
-      };
+    '$window',
+    '$ionicPopup',
+    'dataService',
+    function ($scope, $stateParams, $window, $ionicPopup, dataService) {
+	  $scope.event;
+	  var i = 0,
+	  id = $stateParams.id;
+	  console.log($stateParams);	
+      $scope.loading = true;
+	  dataService.getEvent(id).then(function(events){
+		$scope.event = events;
+      }).finally(function () {
+        $scope.loading = false;
+		$scope.apply
+      });
 
       $scope.reload = function () {
-        $scope.loading = true;
-        eventService.search($scope.search, $scope.wheelChair, $scope.wheelChairLift).then(function (events) {
-          $scope.limit = 10;
-          $scope.events = events;
-        }).finally(function () {
-          $scope.loading = false;
-          $scope.$broadcast('scroll.refreshComplete');
-        });
+		$scope.loading = true;
+		//issues: being given a array from backend
+        dataService.getEvent(id).then(function(events){
+		$scope.event = events;
+      }).finally(function () {
+        $scope.loading = false;
+		$scope.apply
+      });
       };
 
-      $scope.goToMap = function () {
-        $ionicHistory.currentView($ionicHistory.backView());
-        $ionicHistory.nextViewOptions({
-          disableAnimate: true
-        });
-        $state.go('tabsController.results.map', {
-          search: $scope.string,
-          wheelChair: $scope.wheelChair,
-          wheelChairLift: $scope.wheelChairLift
-        });
+      $scope.call = function () {
+        $window.open('tel:' + $scope.event.contact.tel, '_system');
       };
-      $scope.goToList = function () {
-        $ionicHistory.currentView($ionicHistory.backView());
-        $ionicHistory.nextViewOptions({
-          disableAnimate: true
-        });
-        $state.go('tabsController.results.list', {
-          search: $scope.search,
-          wheelChair: $scope.wheelChair,
-          wheelChairLift: $scope.wheelChairLift
+
+      $scope.mail = function () {
+        $window.open('mailto:' + $scope.event.contact.email, '_system');
+      };
+
+      $scope.website = function () {
+        $window.open($scope.event.website, '_system');
+      };
+
+      $scope.map = function () {
+        if (ionic.Platform.isIOS()) {
+          $window.open('maps://?q=' + $scope.event.lat + ',' + $scope.event.lng, '_system');
+        } else {
+          $window.open('geo://0,0?q=' + $scope.event.lat + ',' + $scope.event.lng + '(' + $scope.event.name + '/' + $scope.event.city + ')&z=15', '_system');
+        }
+      };
+
+      $scope.report = function () {
+        $ionicPopup.prompt({
+          scope: $scope,
+          title: '<span class="energized">Report an issue</span>',
+          subTitle: '<span class="stable">What\'s wrong or missing?</span>',
+          inputType: 'text',
+          inputPlaceholder: ''
+        }).then(function (res) {
+          if (res) {
+            // here connect to backend and send report
+          }
         });
       };
     }

@@ -47,8 +47,9 @@ angular.module('app.routes', [])
       }
     }
   })
-
+	
   .state('tabsController.myEvents', {
+	cache: false,
     url: '/MyEvents',
     views: {
       'tab2': {
@@ -68,6 +69,16 @@ angular.module('app.routes', [])
     }
   })
   
+   .state('tabsController.editEvent', {
+    url: '/editEvent',
+    views: {
+      'tab2': {
+        templateUrl: 'templates/editEvent.html',
+        controller: 'editEventCtrl'
+      }
+    }
+  })
+  
 
   .state('tabsController.settings', {
     url: '/Settings',
@@ -79,15 +90,7 @@ angular.module('app.routes', [])
     }
   })
 
-  .state('tabsController.editProfile', {
-    url: '/editProfile',
-    views: {
-      'tab1': {
-        templateUrl: 'templates/editProfile.html',
-        controller: 'editProfileCtrl'
-      }
-    }
-  })
+ 
 
 $urlRouterProvider.otherwise('/page5')
 

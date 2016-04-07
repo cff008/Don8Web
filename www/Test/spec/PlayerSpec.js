@@ -29,6 +29,40 @@ describe('myEventsCtrl', function() {
 				eventServiceMock = {
 					getNext: jasmine.createSpy('getNext spy').and.returnValue('pie'),
 				};
+				  eventServiceMock.getMyEvents = function(id) {
+					var deferred = $q.defer();
+					deferred.resolve(mockEvent);
+					
+					return deferred.promise;   
+					}
+				
+				//mocking the state 
+				stateMock = jasmine.createSpyObj('$state.spy', ['go']);
+				
+				
+				
+				
+				controller = $controller('myEventsCtrl', {'$scope': $scope, '$state': stateMock, 'dataService': eventServiceMock});
+			});
+    
+      $scope.loadNext();
+	  $scope.$root.$digest();
+      expect($scope.events[0]).toEqual(mockEvent[0]);
+	  expect($scope.index).toEqual(1);
+	  $scope.loadNext();
+	  $scope.$root.$digest();
+	  expect($scope.index).toEqual(2);
+	  expect($scope.events).toEqual(mockEvent);
+    });
+ 
+	it('canMorebeloaded', function(){
+		module('app.controllers');
+
+		inject(function($rootScope,$controller, $q) {
+				$scope = $rootScope.$new()
+				eventServiceMock = {
+					getNext: jasmine.createSpy('getNext spy').and.returnValue('pie'),
+				};
 				  eventServiceMock.getNext = function(index) {
 					var deferred = $q.defer();
 					deferred.resolve(mockEvent);
@@ -42,18 +76,12 @@ describe('myEventsCtrl', function() {
 				//mock da scope
 				
 				
-				controller = $controller('myEventsCtrl', {'$scope': $scope, '$state': stateMock, 'eventService': eventServiceMock});
+				controller = $controller('myEventsCtrl', {'$scope': $scope, '$state': stateMock, 'dataService': eventServiceMock});
 			});
-    
-		debugger;
-      $scope.loadNext();
-	  $scope.$root.$digest();
-      expect($scope.events).toEqual(mockEvent);
-	  expect($scope.index).toEqual(1);
-	  $scope.loadNext();
-	  $scope.$root.$digest();
-	  expect($scope.index).toEqual(2);
-	  expect($scope.events).toEqual(mockEvent2);
-    });
+			
+		expect($scope.moreDataCanBeLoaded()).toEqual(true);
+		$scope.index = 7;
+		expect($scope.moreDataCanBeLoaded()).toEqual(true);
+	});
  
 });

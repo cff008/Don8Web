@@ -282,11 +282,11 @@ angular.module('app.services', [])
 				console.log(this.events);
 			  return $q.resolve(this.events);
 			}else{
-			  return $q.reject(resp.data);
+			  return [];
 			}
 		   
 		  }, function(err){
-			return $q.reject(resp.data);
+			return [];
 		  });
 		},
 	getEvent: function(id){
@@ -315,7 +315,35 @@ angular.module('app.services', [])
       params: {userid: id}
     }).then(function successCallback(response) {
 		if(response.data.status == 'OK'){
+		if(response.data.events.length){
+			return response.data.events[id];
+		}
         return response.data.events;
+		
+      } else if(response.data.status == 'UNKNOWN_ERROR'){
+        $q.reject('Something went wrong. Please try again.')
+      } else if(response.data.status == 'INVALID_REQUEST'){
+        $q.reject('Invalid userid');
+      } else {
+        $q.reject('This shouldn\'t happen.');
+      }
+    }, function errorCallback(response){
+      $q.reject('Server communication error');
+    });
+	  },
+	 addEvent: function(id){
+	 	return $http({
+      method: 'GET',
+	  //need url from backend
+      url: '/event',
+      params: {userid: id}
+	  }).then(function successCallback(response) {
+		if(response.data.status == 'OK'){
+		if(response.data.events.length){
+			return response.data.events[id];
+		}
+        return response.data.events;
+		
       } else if(response.data.status == 'UNKNOWN_ERROR'){
         $q.reject('Something went wrong. Please try again.')
       } else if(response.data.status == 'INVALID_REQUEST'){
@@ -327,6 +355,8 @@ angular.module('app.services', [])
       $q.reject('Server communication error');
     });
 	  }
+	 
+	 
 	  
   }
 }
