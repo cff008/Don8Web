@@ -100,26 +100,43 @@ angular.module('app.controllers', [])
 	}
 	  ])
    
-.controller('settingsCtrl', function($scope) {
+.controller('settingsCtrl', function($rootScope, $scope, SettingsService, $state, $ionicPopup) {
+
   $scope.data = {};
 
-  //TODO: Add functions(s) to update settings based on user input
+
+  $scope.getSettings = function() {
+
+  }
+
+  $scope.updateSettings = function() {
+
+  }
+
+  $scope.logout = function(){
+    //TODO: clear information about current user - iteration3?
+    
+    //change state to login screen
+    $state.go('login');
+  }
 
 })
    
-.controller('loginCtrl', function($scope, LoginService, $ionicPopup, $state) {
+.controller('loginCtrl', function($scope, $rootScope, LoginService, $ionicPopup, $state) {
 
-	//Login verifier
-	$scope.data = {};
+  //Login verifier
+  $scope.data = {};
     $scope.login = function() {
-    	console.log("LOGIN user: " + $scope.data.email + " - PW: " + $scope.data.password);	//TODO: This will need to be taken out for security reasons
+
+      console.log("LOGIN user: " + $scope.data.email + " - PW: " + $scope.data.password); //TODO: This will need to be taken out for security reasons
         LoginService.loginUser($scope.data.email, $scope.data.password).success(function(data) {
-            $state.go('tabsController.myProfile');
-            console.log("Successful login");
+            $state.go('tabsController.organizationProfile');
+            console.log("Successful login.");
         }).error(function(data) {
+          //TODO: do different things for invalid password and server errors
             var alertPopup = $ionicPopup.alert({
                 title: 'Login failed!',
-                template: 'Please check your credentials! Username: user Password: secret'
+                template: data
             });
             console.log("Unsuccessful login");
         });
@@ -140,18 +157,19 @@ angular.module('app.controllers', [])
   $scope.data = {};
 
     $scope.signup = function(){
-      console.log("Account Created: NAME: " + $scope.data.username + " - EMAIL: " + $scope.data.email + " - PW: " + $scope.data.password); //TODO: remove this line for security reasons
 
-      SignupService.signupUser($scope.data.username, $scope.data.email, $scope.data.password).success(function(data) {
-        $state.go('tabsController.myProfile');
+      SignupService.signupUser($scope.data.org_name, $scope.data.contact_first, $scope.data.contact_last, $scope.data.email, $scope.data.password).success(function(data) {
+        console.log("Account Created: ORG: " + $scope.data.org_name + " primary contact: " + $scope.data.contact_first + " " + $scope.data.contact_last + " - EMAIL: " + $scope.data.email + " - PW: " + $scope.data.password); //TODO: remove this line for security reasons
+        $state.go('tabsController.editProfile');
         var alertPopup = $ionicPopup.alert({
           title: 'Welcome to Don8!',
-          template: 'Please fill out your user profile'
+          template: 'Please fill out your user profile.'
         });
       })
       .error(function(data) {
         var alertPopup = $ionicPopup.alert({
-          title: 'Unable to create account'
+          title: 'Unable to create account',
+          template: data
         });
       });
     }

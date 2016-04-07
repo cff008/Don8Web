@@ -12,11 +12,11 @@
   	},
   	{
   		"path": "/login",
-  		"proxyUrl": "http://www.don8don8.site/login.php"
+  		"proxyUrl": "http://www.don8don8.site/data/login.php"
   	},
   	{
   		"path": "/create_profile",
-  		"proxyUrl": "http://www.don8don8.site/create_profile.php"
+  		"proxyUrl": "http://www.don8don8.site/data/create_org_profile.php"
   	},
     {
       "path": "/get_settings",
