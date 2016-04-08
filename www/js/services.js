@@ -67,7 +67,7 @@ angular.module('app.services', [])
       }).then(function successCallback(response) {
         //this callback will be called asynchronously when the response is available
         if(response.data.status == 'OK'){
-          deferred.resolve('Welcome ' + contact_first + ' ' + contact_last + '!');
+          deferred.resolve(response.data);
           //$rootScope.userid = response.data.userid;
         } else if(response.data.status == 'UNKNOWN_ERROR') {
           deferred.reject('Something went wrong. Please try again.');

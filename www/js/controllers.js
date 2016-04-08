@@ -161,6 +161,7 @@ angular.module('app.controllers', [])
       SignupService.signupUser($scope.data.org_name, $scope.data.contact_first, $scope.data.contact_last, $scope.data.email, $scope.data.password).success(function(data) {
         console.log("Account Created: ORG: " + $scope.data.org_name + " primary contact: " + $scope.data.contact_first + " " + $scope.data.contact_last + " - EMAIL: " + $scope.data.email + " - PW: " + $scope.data.password); //TODO: remove this line for security reasons
         $state.go('tabsController.editProfile');
+        $rootScope.userid = data.userid;
         var alertPopup = $ionicPopup.alert({
           title: 'Welcome to Don8!',
           template: 'Please fill out your user profile.'
