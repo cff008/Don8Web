@@ -39,7 +39,8 @@ angular.module('app.controllers', [])
     '$scope',
     '$state',
     'dataService',
-    function ($scope, $state, dataService) {
+	'$rootScope',
+    function ($scope, $state, dataService, $rootScope) {
 		$scope.events = [];
 		$scope.newEvents = [];
 		$scope.index = 0;
@@ -62,7 +63,7 @@ angular.module('app.controllers', [])
 
 	 $scope.loadNext = function () {
 		if($scope.events.length == 0){
-		dataService.getMyEvents().then(function(events){
+		dataService.getMyEvents($rootScope.userid).then(function(events){
 			$scope.newEvents = events;
 			// .then(function (events) {
 			  if($scope.newEvents){
@@ -230,13 +231,14 @@ angular.module('app.controllers', [])
 	'dataService',
 	'$state',
 	function ($scope, $stateParams, dataService,$state){
-		$scope.event = [];
+		$scope.event = {};
 		var id = $stateParams;
-		if(id != -1){
+		if(id != 0){
 			$scope.loading = true;
 			dataService.getEvent(id).then(function (event) {
-			$scope.event = event.
-			$scope.loading = false;	
+			if(event){$scope.event = event;
+			}
+				$scope.loading = false;
 			});
 		}else{
 		
@@ -261,7 +263,7 @@ angular.module('app.controllers', [])
     '$ionicPopup',
     'dataService',
     function ($scope, $stateParams, $window, $ionicPopup, dataService) {
-	  $scope.event;
+	  $scope.event = {};
 	  var i = 0,
 	  id = $stateParams.id;
 	  console.log($stateParams);	
@@ -270,7 +272,7 @@ angular.module('app.controllers', [])
 		$scope.event = events;
       }).finally(function () {
         $scope.loading = false;
-		$scope.apply
+
       });
 
       $scope.reload = function () {
@@ -280,7 +282,7 @@ angular.module('app.controllers', [])
 		$scope.event = events;
       }).finally(function () {
         $scope.loading = false;
-		$scope.apply
+
       });
       };
 
