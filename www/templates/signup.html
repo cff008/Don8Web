@@ -1,21 +1,44 @@
 <ion-view title="Signup">
-    <ion-content overflow-scroll="true" padding="true" scroll="false" class="has-header">
-        <form class="list">
+    <ion-content padding="true" scroll="false" class="has-header">
+        <form class="list" name="signupForm">
             <ion-list>
                 <label class="item item-input">
-                    <span class="input-label">Name</span>
-                    <input type="text" placeholder="">
+                    <span class="input-label">Organization Name</span>
+                    <input type="text" placeholder="Organization Name" ng-model="data.org_name" name="orgname" required>
+                    <span style="color:red">
+                        <span ng-show="signupForm.orgname.$error.required && signupForm.orgname.$dirty">!</span>
+                    </span>
                 </label>
                 <label class="item item-input">
-                    <span class="input-label">Username</span>
-                    <input type="text" placeholder="">
+                    <span class="input-label">Primary Contact First Name</span>
+                    <input type="text" placeholder="First Name" ng-model="data.contact_first" name="firstname" required>
+                    <span style="color:red">
+                        <span ng-show="signupForm.firstname.$error.required && signupForm.firstname.$dirty">!</span>
+                    </span>
+                </label>
+                <label class ="item item-input">
+                    <span class="input-label">Primary Contact Last Name</span>
+                    <input type="text" placeholder="Last Name" ng-model="data.contact_last" name="lastname" required>
+                    <span style="color:red">
+                        <span ng-show="signupForm.lastname.$error.required && signupForm.lastname.$dirty">!</span>
+                    </span>
+                </label>
+                <label class="item item-input">
+                    <span class="input-label">Email</span>
+                    <input type="email" placeholder="name@example.com" ng-model="data.email" name="email" required>
+                    <span style="color:red">
+                        <span ng-show="(signupForm.email.$error.required || signupForm.email.$invalid) && signupForm.email.$dirty">!</span>
+                    </span>
                 </label>
                 <label class="item item-input">
                     <span class="input-label">Password</span>
-                    <input type="text" placeholder="">
+                    <input type="text" placeholder="password" ng-model="data.password" name="password" required>
+                    <span style="color:red">
+                        <span ng-show="signupForm.password.$error.required && signupForm.password.$dirty">!</span>
+                    </span>
                 </label>
             </ion-list>
-            <a ui-sref="tabsController.organizationProfile" id="signup-button3" class="button button-stable  button-block">Sign up</a>
+            <a id="signup-button3" class="button button-stable  button-block" ng-disabled="signupForm.$invalid" ng-click="signup()">Sign up</a>
         </form>
     </ion-content>
 </ion-view>

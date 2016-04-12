@@ -1,23 +1,36 @@
 <ion-view title="Login">
-    <ion-content overflow-scroll="true" padding="true" class="has-header">
-        <form class="list">
+    <ion-content padding="true" class="has-header">
+        <form class="list" name="loginForm">
+
             <ion-list>
+
+                <div style="text-align:center;">
+                    <img src="img/Don8-Logo.png" width="25%" height="auto">
+                 </div> 
+
                 <label class="item item-input">
-                    <span class="input-label">Username</span>
-                    <input type="text" placeholder="">
+                    <span class="input-label">Email</span>
+                    <input type="email" placeholder="name@example.com" name="emailAddress" ng-model="data.email" required>
+                    <span style="color:red">
+                        <span ng-show="(loginForm.emailAddress.$error.required || loginForm.emailAddress.$invalid) && loginForm.emailAddress.$dirty">!</span>
+                    </span>
                 </label>
+                
                 <label class="item item-input">
                     <span class="input-label">Password</span>
-                    <input type="password" placeholder="">
+                    <input type="password" placeholder="password" name="password" ng-model="data.password" required>
+                    <span style="color:red">
+                        <span ng-show="loginForm.password.$error.required && loginForm.password.$dirty">!</span>
+                    </span>
                 </label>
+
             </ion-list>
+
+
             <div class="spacer" style="height: 40px;"></div>
-            
-            <a ui-sref="tabsController.organizationProfile" id="login-button1" class="button button-stable  button-block">Log in</a>
-            <a ui-sref="signup" id="login-button2" class="button button-positive  button-block button-clear">Or create an account</a>
+            <button id="login-button1" class="button button-stable  button-block" ng-disabled="loginForm.$invalid" ng-click="login()">Log in</button>
+            <a ui-sref="signup" id="login-button2" class="button button-positive  button-block button-clear">Create an account</a>
         </form>
-        <div style="text-align:center;">
-                <img src="img/Drawing.png" width="20%" height="auto">
-        </div> 
+
     </ion-content>
 </ion-view>
