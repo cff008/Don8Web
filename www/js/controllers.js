@@ -263,16 +263,16 @@ angular.module('app.controllers', [])
 		
 		}
 		
-		/*$scope.submit = function() {
-			dataService.addEvent().then{
-				$state.go('tabsController.myEvents');
-			};
-		};
-		
-		$scope.dataCheck = function(){
-			//maybe need later
-		}'*/
+	// 	$scope.submit = function() {
+	// 		dataService.addEvent().then{
+	// 			$state.go('tabsController.myEvents');
+	// 		};
 	}
+		
+	// 	$scope.dataCheck = function(){
+	// 		//maybe need later
+	// 	};
+	// };
 	])
  
 .controller('detailsCtrl', [

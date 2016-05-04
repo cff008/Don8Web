@@ -69,11 +69,11 @@ angular.module('app.routes', [])
     }
   })
   
-   .state('tabsController.editEvent', {
-    url: '/editEvent',
+   .state('tabsController.createEvent', {
+    url: '/createEvent',
     views: {
-      'tab2': {
-        templateUrl: 'templates/editEvent.html',
+      'tab4': {
+        templateUrl: 'templates/createEvent.html',
         controller: 'editEventCtrl'
       }
     }

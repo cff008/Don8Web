@@ -1,0 +1,90 @@
+<ion-view>
+  <ion-nav-title>Create Event</ion-nav-title>
+  <ion-content padding="true">
+    <ion-refresher class="spinner-balanced" on-refresh="reload()"></ion-refresher>
+    <div class="text-center">
+      <ion-spinner class="spinner-balanced" ng-show="loading"></ion-spinner>
+    </div>
+    <div ng-show="!loading">
+      <h3><label class="item item-input">
+                <span class="input-label">Event Name: </span>
+                <input type="text"  ng-required="true"  ng-maxlength="50" placeholder="{{event.name}}">
+        </label></h3>
+      <h4><b><label class="item item-input">
+                <span class="input-label">Event City: </span>
+                <input type="text" ng-required="true" ng-maxlength="50" placeholder="{{event.city}}">
+        </label></b> <small><label class="item item-input">
+                <span class="input-label" >Event District: </span>
+                <input type="text" placeholder="ie Downton, Campus, etc" ng-required="false" ng-maxlength="25">
+        </label></small></h4>
+      <br>
+
+      <div class="text-center">
+        <img ng-src="{{event.image}}" class="image">
+      </div>
+      <ion-list>
+        <ion-item class="item-divider item-icon-right"><b>Address</b> <i class="icon ion-location"></i></ion-item>
+        <ion-item>
+          <label class="item item-input">
+                <span class="input-label">Event Street Number: </span>
+                <input type="text" placeholder="{{event.number}}" ng-required="true" ng-maxlength="10">
+        </label>
+                <label class="item item-input">
+                <span class="input-label">Event Street Name: </span>
+                <input type="text" placeholder="{{event.street}}"  ng-required="true" ng-maxlength="50">
+        </label> 
+         <label class="item item-input">
+                <span class="input-label">Event Zip Code: </span>
+                <input type="text" placeholder="{{event.zip}}" ng-required="true" ng-maxlength="5">
+        </label> <label class="item item-input">
+                <span class="input-label">Event City: </span>
+                <input type="text" placeholder="{{event.city}}" ng-required="true" ng-maxlength="50">
+        </label>
+        </ion-item>
+      </ion-list>
+	  <b> Description</b>
+	  <div class="card">
+			<div class="item item-text-wrap">
+				<label class="item item-input">
+                <span class="input-label">Event Description: </span>
+                <input type="text" placeholder="event.description" ng-required="false" ng-maxlength="240">
+        </label>
+			</div>
+		</div>
+      <br>
+      <ion-list>
+        <ion-item class="item-divider item-icon-right"><b>Dates</b> <i class="icon ion-ios-calendar-outline"></i></ion-item>
+        <ion-item ng-repeat="date in event.dates">
+          <input type="text" placeholder="event.dates" ng-required="false" ng-maxlength="15">
+        </ion-item>
+      </ion-list>
+      <br>
+      <ion-list>
+        <ion-item class="item-divider item-icon-right"><b>Contact</b> <i class="icon ion-chatboxes"></i></ion-item>
+        <ion-item class="item-icon-right" >
+          Call us
+          <i class="icon ion-android-call"></i>
+		  <input type="text" placeholder="event.contact.tel" ng-required="false" ng-maxlength="20">
+        </ion-item>
+        <ion-item class="item-icon-right">
+		  <input type="text" placeholder="event.contact.email" ng-required="false" ng-maxlength="50">
+          Send us an e-mail
+          <i class="icon ion-ios-email"></i>
+        </ion-item>
+        <ion-item class="item-icon-right">
+		
+          Visit our homepage
+		  <input type="text" placeholder="event.description" ng-required="false" ng-maxlength="120">
+          <i class="icon ion-ios-home"></i>
+        </ion-item>
+      </ion-list>
+    </div>
+  </ion-content>
+  <ion-footer-bar class="bar-stable">
+    <div class="buttons">
+      <div class="button button-clear" ng-disabled="loading" ng-click="submit()">
+        Submit
+      </div>
+    </div>
+  </ion-footer-bar>
+</ion-view>
