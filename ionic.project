@@ -25,6 +25,11 @@
     {
       "path": "/update_settings",
       "proxyUrl": "http://www.don8don8.site/update_settings.php"
+    },
+	
+	 {
+      "path": "/create_event",
+      "proxyUrl": "http://don8don8.site/data/create_event_profile.php"
     }
   ] 
 }

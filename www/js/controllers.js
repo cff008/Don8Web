@@ -58,7 +58,7 @@ angular.module('app.controllers', [])
 	  
 	 $scope.goToEditEvent = function(){
 		$scope.temp = -1;
-		$state.go('tabsController.editEvent', $scope.temp);
+		$state.go('tabsController.createEvent', $scope.temp);
 	 }
 
 	 $scope.loadNext = function () {
@@ -98,6 +98,12 @@ angular.module('app.controllers', [])
 			return true;
 		}
 	};
+	
+	$rootScope.$on('$stateChangeSuccess', 
+		function(){ 
+		
+		$scope.loadNext();});
+	
 	}
 	  ])
    
@@ -249,8 +255,9 @@ angular.module('app.controllers', [])
 	'$stateParams',
 	'dataService',
 	'$state',
-	function ($scope, $stateParams, dataService,$state){
-		$scope.event = {};
+	'$rootScope',
+	function ($scope, $stateParams, dataService,$state, $rootScope){
+			  $scope.event = {userid:'', name:'',city:'',street:'',number:'', zip:'', state:''};
 		var id = $stateParams;
 		if(id != 0){
 			$scope.loading = true;
@@ -263,12 +270,26 @@ angular.module('app.controllers', [])
 		
 		}
 		
-	// 	$scope.submit = function() {
-	// 		dataService.addEvent().then{
-	// 			$state.go('tabsController.myEvents');
-	// 		};
-	}
-		
+	 	$scope.submit = function() {
+			info = {};
+			info.id = $rootScope.userid;
+			info.name =$scope.event.name;
+			info.street = $scope.event.street;
+			info.zip = $scope.event.zip;
+			info.state = $scope.event.state;
+			info.contact_first = $scope.event.first_name;
+			info.contact_last = $scope.event.last_name;
+			info.email = $scope.event.email;
+			info.city = $scope.event.city;
+			info.number = $scope.event.number;
+			info.description = $scope.event.description;
+			info.website = $scope.event.website;
+			
+			dataService.addEvent(info).then(function(){
+	 			$state.go('tabsController.myEvents');
+	 		});
+		}
+	}	
 	// 	$scope.dataCheck = function(){
 	// 		//maybe need later
 	// 	};
@@ -282,7 +303,7 @@ angular.module('app.controllers', [])
     '$ionicPopup',
     'dataService',
     function ($scope, $stateParams, $window, $ionicPopup, dataService) {
-	  $scope.event = {};
+
 	  var i = 0,
 	  id = $stateParams.id;
 	  console.log($stateParams);	
