@@ -8,7 +8,7 @@
   	},
 	{
   		"path": "/event",
-  		"proxyUrl": "http://don8don8.site/data/events.php"
+  		"proxyUrl": "http://don8don8.site/data/org_events.php"
   	},
   	{
   		"path": "/login",
