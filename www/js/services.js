@@ -186,10 +186,10 @@ angular.module('app.services', [])
 		return $http({
       method: 'GET',
       url: '/event',
-      params: {userid: id}
+      params: {org_id: id}
     }).then(function successCallback(response) {
 		if(response.data.status == 'OK'){
-		
+	
         return response.data.events;
 		
       } else if(response.data.status == 'UNKNOWN_ERROR'){
@@ -203,18 +203,16 @@ angular.module('app.services', [])
       $q.reject('Server communication error');
     });
 	  },
-	 addEvent: function(id){
+	 addEvent: function(info){
 	 	return $http({
       method: 'GET',
 	  //need url from backend
-      url: '/event',
-      params: {userid: id}
+      url: '/create_event',
+      params: {org_id: info.id, name:info.name, description: info.description, contact_first: info.contact_first, contact_last:info.contact_last, contact_email:info.email, contact_phone: info.contact_phone, number: info.number, street:info.street, city: info.city, zip: info.zip, website: info.website, state: info.state, number: info.number}
 	  }).then(function successCallback(response) {
 		if(response.data.status == 'OK'){
-		if(response.data.events.length){
-			return response.data.events[id];
-		}
-        return response.data.events;
+		
+        return true;
 		
       } else if(response.data.status == 'UNKNOWN_ERROR'){
         $q.reject('Something went wrong. Please try again.')

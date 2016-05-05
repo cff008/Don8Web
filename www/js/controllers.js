@@ -62,32 +62,27 @@ angular.module('app.controllers', [])
 	 }
 
 	 $scope.loadNext = function () {
-		if($scope.events.length == 0){
+		
+		if($rootScope.userid != null){
 		dataService.getMyEvents($rootScope.userid).then(function(events){
 			$scope.newEvents = events;
 			// .then(function (events) {
-			  if($scope.newEvents){
+			  console.log(events);
 			  
 			  if($scope.newEvents != $scope.events){
-			  $scope.events = $scope.events.concat(addFive($scope.newEvents,$scope.index));
-			  $scope.index += $scope.newEvents.length;
+			  $scope.events = $scope.newEvents;
 			  }
 			  $scope.$broadcast('scroll.infiniteScrollComplete');
-			}else{
-			 $scope.events = [];
-			}
+			
 		// .finally(function () 
 			});
-		}
-		else{
-			if($scope.newEvents != $scope.events){
-			  $scope.events = $scope.events.concat(addFive($scope.newEvents,$scope.index));
-			  $scope.index += $scope.newEvents.length;
-			  }
 			 $scope.$broadcast('scroll.infiniteScrollComplete');
+			}
+			$scope.events = [];
+			$scope.$broadcast('scroll.infiniteScrollComplete');
+			
 		}
-      };
-	  
+	  $scope.loadNext();
 	$scope.moreDataCanBeLoaded = function(){
 		if($scope.newEvents){
 		if($scope.newEvents.length == $scope.index && $scope.newEvents.length != 0){
